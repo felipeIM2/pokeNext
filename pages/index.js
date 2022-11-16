@@ -55,14 +55,14 @@ export default function Index(props) {
       <div className="bg-blue-700 min-h-screen max-h-full">
         <div className="mx-auto w-[400px]">
           <div className="absolute top-[50px] h-[50px] h-[400px] w-[440px] bg-red-600 shadow-black shadow-2xl rounded-[10px]">
-            <h1 className="absolute left-[160px] text-[20px] top-[35px]">
+            <h1 className="absolute left-[165px] text-[18px] top-[38px]">
               <strong>Pokedéx</strong>
             </h1>
             <div className=" h-[45px] flex bg-red-600 mt-[10px]">
               <span className="shadow shadow-black w-[40px] h-[40px] rounded-[30px] flex mx-auto bg-white">
                 <span className="shadow shadow-blue-600 w-[30px] h-[30px] rounded-[30px] flex mx-auto mt-[5px] bg-blue-600"></span>
               </span>
-              <div className="flex space-x-[5px] mr-[270px]">
+              <div className="flex space-x-[5px] mr-[300px]">
                 <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-red-700"></span>
                 <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-yellow-400"></span>
                 <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-green-600"></span>
