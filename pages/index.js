@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import Image from "next/image";
 
 export async function getServerSideProps(context) {
   const pokemons = await axios.get(
@@ -17,17 +16,19 @@ export async function getServerSideProps(context) {
 
 export default function Index(props) {
   const [dex, setDex] = useState(props.pokemons.results);
-  let search = props.search.pokemon.toLowerCase();
-  
-  //verificação
-  let pokeNames = dex.map((value) => value.name);
-  let verify = pokeNames.find((e) => e == search);
+  let search = [props.search.pokemon];
+  let lower = search.map(low => low.toLowerCase())
 
-  if (search != undefined && verify == undefined) {
-  }
+  // //verificação
+
+  // let pokeNames = dex.map((value) => value.name);
+  // let verify = pokeNames.find((e) => e == search);
+  // if (search != undefined && verify == undefined) {
+  // }
+
   //trazer skins
   dex.map((value) => {
-    if (value.name == search) {
+    if (value.name == lower) {
       async function skn() {
         await axios
           .get(value.url)
@@ -36,10 +37,7 @@ export default function Index(props) {
       skn();
     }
   });
-
   let [skin, setSkin] = useState([]);
-  console.log(search)
-
 
   return (
     <>
@@ -69,7 +67,7 @@ export default function Index(props) {
               <div className="shadow shadow-black h-[140px] bg-gray-800 mt-[5px] rounded-[10px] p-[2px]">
                 <div className="text-white">
                   {dex.map((value) => {
-                    if (search == value.name) {
+                    if (lower == value.name) {
                       return (
                         <div key={value.url}>
                           <div>
@@ -78,7 +76,12 @@ export default function Index(props) {
                             </p>
                             <div>
                               <div className="flex flex-col items-center w-[180px] h-[180px] mx-auto ml-[4px]">
-                                <img src={skin} width="120px" height="120px" className="absolute bottom-[165px]"/>
+                                <img
+                                  src={skin}
+                                  width="120px"
+                                  height="120px"
+                                  className="absolute bottom-[165px]"
+                                />
                               </div>
                             </div>
                           </div>
@@ -108,7 +111,7 @@ export default function Index(props) {
                   <span className=" w-[40px] h-[10px] mx-auto flex bg-blue-700 rounded-[30px] ml-[10px] shadow shadow-black"></span>
                 </div>
                 <div className="flex">
-                  <form method="" action="" className="flex mt-[4px]">
+                  <form method="GET" className="flex mt-[4px]">
                     <button
                       type="submit"
                       className="ml-[30px] w-[60px] h-[60px] mt-[1px] rounded-[30px] bg-gray-700 shadow shadow-black"
