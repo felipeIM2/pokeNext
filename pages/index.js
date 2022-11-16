@@ -54,7 +54,7 @@ export default function Index(props) {
     <>
       <div className="bg-blue-700 min-h-screen max-h-full">
         <div className="mx-auto w-[400px]">
-          <div className="absolute top-[50px] h-[50px] h-[400px] w-[440px] bg-red-600 shadow-black shadow-2xl rounded-[10px]">
+          <div className="absolute top-[50px] h-[50px] h-[400px] w-[400px] bg-red-600 shadow-black shadow-2xl rounded-[10px]">
             <h1 className="absolute left-[165px] text-[18px] top-[38px]">
               <strong>Pokedéx</strong>
             </h1>
@@ -136,11 +136,11 @@ export default function Index(props) {
                     />
                   </form>
                   <div>
-                    <select name="pokemon" className="absolute bottom-[310px] right-[20px] w-[100px] text-center outline-none rounded-[5px] bg-red-600">
-                      <option disabled="on" selected="on" className="text-slate-300">Pokelist</option>
+                    <select name="pokemon" className="absolute bottom-[310px] right-[4px] w-[80px] text-center outline-none rounded-[5px] bg-red-600 text-[17px]">
+                      <option disabled="on" selected="on" className="text-slate-400 text-[18px]">Pokelist...</option>
                       {dex.map(value => {
                         return (
-                          <option className="border-none " disabled="" key={value.url}>
+                          <option className="border-none text-[15px]" key={value.url}>
                           {value.name}
                           </option>
                         )
