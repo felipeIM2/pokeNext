@@ -16,9 +16,14 @@ export async function getServerSideProps(context) {
 
 export default function Index(props) {
   const [dex, setDex] = useState(props.pokemons.results);
-  let search = [props.search.pokemon];
+  let search = props.search.pokemon;
   
-  
+  let nameLower = []
+  if(search != undefined) {
+     const lower = search.toLowerCase()
+      nameLower.push(lower)
+  }
+
   
   // //verificação
 
@@ -29,13 +34,12 @@ export default function Index(props) {
 
   //trazer skins
   dex.map((value) => {
-    if (value.name == search) {
+    if (value.name == nameLower) {
       async function skn() {
         await axios
           .get(value.url)
           .then((data) => (
-            setSkin(data.data.sprites.front_default),
-            console.log(data.data)
+            setSkin(data.data.sprites.front_default)
           ));
       }
       skn();
@@ -71,7 +75,7 @@ export default function Index(props) {
               <div className="shadow shadow-black h-[140px] bg-gray-800 mt-[5px] rounded-[10px] p-[2px]">
                 <div className="text-white">
                   {dex.map((value) => {
-                    if (search == value.name) {
+                    if (nameLower == value.name) {
                       return (
                         <div key={value.url}>
                           <div>
