@@ -17,8 +17,9 @@ export async function getServerSideProps(context) {
 export default function Index(props) {
   const [dex, setDex] = useState(props.pokemons.results);
   let search = [props.search.pokemon];
-  let lower = search.map(low => low.toLowerCase())
-
+  
+  
+  
   // //verificação
 
   // let pokeNames = dex.map((value) => value.name);
@@ -28,11 +29,14 @@ export default function Index(props) {
 
   //trazer skins
   dex.map((value) => {
-    if (value.name == lower) {
+    if (value.name == search) {
       async function skn() {
         await axios
           .get(value.url)
-          .then((data) => setSkin(data.data.sprites.front_default));
+          .then((data) => (
+            setSkin(data.data.sprites.front_default),
+            console.log(data.data)
+          ));
       }
       skn();
     }
@@ -67,7 +71,7 @@ export default function Index(props) {
               <div className="shadow shadow-black h-[140px] bg-gray-800 mt-[5px] rounded-[10px] p-[2px]">
                 <div className="text-white">
                   {dex.map((value) => {
-                    if (lower == value.name) {
+                    if (search == value.name) {
                       return (
                         <div key={value.url}>
                           <div>
@@ -121,6 +125,7 @@ export default function Index(props) {
                       name="pokemon"
                       className="text-center bg-green-400 h-[40px] w-[150px] py-[30px] px-[10px] mx-auto flex ml-[30px] shadow shadow-black rounded-[8px] outline-none "
                       placeholder="Buscar..."
+                      required
                     />
                   </form>
                   <div>
