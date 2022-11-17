@@ -4,7 +4,7 @@ import Link from "next/link";
 
 
 export async function getServerSideProps(context) {
-  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=950" );
+  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=503" );
  
 
   return {
