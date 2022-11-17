@@ -36,15 +36,15 @@ export default function Index(props) {
   //Procura da skin do pokemon
   dex.map((value) => {
     if (value.name == nameLower) {
-      async function call() {
-        await axios
-          .get(value.url)
-          .then((data) => (
-            setSkin(data.data.sprites.front_default)
-          ));
+      let pokeURL = value.url;
+        async function call() {
+          await axios.get(pokeURL)
+            .then((data) => (
+              setSkin(data.data.sprites.front_default)
+            ));
+        }
+        call();
       }
-      call();
-    }
   });
   let [skin, setSkin] = useState([]);
 
