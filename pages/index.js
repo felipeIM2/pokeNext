@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState } from "react"
+import Link from "next/link";
 
 
 export async function getServerSideProps(context) {
@@ -16,8 +17,9 @@ export async function getServerSideProps(context) {
 }
 
 export default function Index(props) {
-  const [dex, setDex] = useState(props.pokemons.results);
-  let search = props.search.pokemon;
+  const [dex, setDex] = useState(props.pokemons.results); //-- Dados de todos os pokemons
+  const [skin, setSkin] = useState([]); //-- Busca das skins dos pokemons
+  let search = props.search.pokemon; //-- Pesquisa do usuário
   
   //Verificação ERROR:-Pokemon não listado 
   let pokeNames = dex.map((value) => value.name);
@@ -30,14 +32,14 @@ export default function Index(props) {
             <div className="flex flex-col items-center mt-[40px] mt-[80px]">
               <h1 className="text-[20px] mb-[10px]">Pokemon: <strong>{search}</strong> não encontrado!</h1>
               <p className="text-[14px] mb-[20px]">clique no botão abaixo para retornar!</p>
-              <a href="/">
+              <Link href="/">
                 <button 
                   type="submit" 
                   className="text-[14px] bg-yellow-400 w-[85px] h-[25px] rounded-[4px] text-blue-700 duration-[.4s] shadow shadow-black"
                 >
                  <strong>POKEDÉX</strong>
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -51,7 +53,6 @@ export default function Index(props) {
     const lower = search.toLowerCase();
     nameLower.push(lower)
   }
-
   //Procura da skin do pokemon
   let pokeURL = []
   dex.map((value) => {
@@ -66,10 +67,7 @@ export default function Index(props) {
      setSkin(data.data.sprites.front_default)
     ));
   }
-  let [skin, setSkin] = useState([]);
-
-	
-
+  
   return (
     <>
       <div className="bg-blue-700 min-h-screen max-h-full">
