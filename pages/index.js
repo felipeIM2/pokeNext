@@ -16,8 +16,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function Index(props) {
+
   const [dex, setDex] = useState(props.pokemons.results); //-- Dados de todos os pokemons
   const [skin, setSkin] = useState([]); //-- Busca das skins dos pokemons
+  const [type, setType] = useState([]) //-- Buscas dos tipos de pokemons
   let search = props.search.pokemon; //-- Pesquisa do usuário
   
   //-- Conversão para minusculos
@@ -30,7 +32,6 @@ export default function Index(props) {
   //Verificação ERROR:-Pokemon não listado 
   let pokeNames = dex.map((value) => value.name);
   let verify = pokeNames.find((e) => e == nameLower);
-
   if (search != undefined && verify == undefined) {
     return (
       <>
@@ -65,10 +66,10 @@ export default function Index(props) {
   async function call() {
     await axios.get(pokeURL[0])
     .then((data) => (
-     setSkin(data.data.sprites.front_default)
+     setSkin(data.data.sprites.front_default),
+     setType(data.data.types[0].type.name)
     ));
   }
-  
 
   return (
     <>
@@ -95,13 +96,13 @@ export default function Index(props) {
               </div>
             </div>
             {/* Pokedex exibir: */}
-            <div className="text-center w-[220px] h-[210px] px-[20px] mx-auto mt-[15px] ml-[90px] p-[10px] bg-slate-300 shadow shadow-black rounded-bl-[20px]">
+            <div className="text-center w-[220px] h-[215px] px-[20px] mx-auto mt-[15px] ml-[90px] p-[10px] bg-slate-300 shadow shadow-black rounded-bl-[20px]">
               {/* Estilos Exibir lado de cima */}
               <div className="flex w-[35px] mx-auto space-x-[15px] ">
                 <span className="shadow shadow-black w-[10px] h-[10px] rounded-[30px] bg-red-700 flex"></span>
                 <span className="shadow shadow-black w-[10px] h-[10px] rounded-[30px] bg-red-700 flex"></span>
               </div>
-              <div className="shadow shadow-black h-[150px] bg-gray-800 mt-[5px] rounded-[10px] p-[2px]">
+              <div className="shadow shadow-black w-[180px] h-[155px] bg-gray-800 mt-[5px] rounded-[10px] p-[2px]">
                 <div className="text-white">
                   {dex.map((value) => {
                     if (nameLower == value.name) {
@@ -119,6 +120,9 @@ export default function Index(props) {
                                   height="110px"
                                   className="absolute bottom-[165px]"
                                 />
+                                <div className="mt-[100px] capitalize mr-[120px] min-w-[40px] max-w-[80px] ">
+                                  <p className="text-[17px]"><strong>{type}</strong></p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -162,8 +166,8 @@ export default function Index(props) {
                     />
                   </form>
                   <div>
-                    <select className="absolute top-[40px] left-[115px] w-[186px] text-center outline-none rounded-[5px] bg-red-600 text-[17px]">
-                      <option disabled selected className="text-slate-400 text-[17px]">Pokelist</option>
+                    <select defaultValue={"none"} className="absolute top-[40px] left-[115px] w-[186px] text-center outline-none rounded-[5px] bg-red-600 text-[19px]">
+                      <option value="none" disabled className="text-slate-200 text-[16px]">Pokelist</option>
                       {dex.map(value => {
                         return (
                           <option className="border-none text-[15px]" key={value.url}>
