@@ -55,14 +55,20 @@ export default function Index(props) {
       <div className="bg-blue-700 min-h-screen max-h-full">
         <div className="mx-auto w-[400px]">
           <div className="absolute top-[50px] h-[50px] h-[400px] w-[400px] bg-red-600 shadow-black shadow-2xl rounded-[10px]">
-            <h1 className="absolute left-[165px] text-[18px] top-[38px]">
-              <strong>Pokedéx</strong>
-            </h1>
+            <div className="absolute right-[28px] top-[64px] font-bold ">
+              <p className="h-[26px] text-[25px]">P</p>
+              <p className="h-[26px] text-[20px]">o</p>
+              <p className="h-[26px] text-[20px]">k</p>
+              <p className="h-[26px] text-[20px]">e</p>
+              <p className="h-[26px] text-[20px]">d</p>
+              <p className="h-[22px] text-[20px]">é</p>
+              <p className="h-[26px] text-[22px]">x</p>
+            </div>
             <div className=" h-[45px] flex bg-red-600 mt-[10px]">
               <span className="shadow shadow-black w-[40px] h-[40px] rounded-[30px] flex mx-auto bg-white">
                 <span className="shadow shadow-blue-600 w-[30px] h-[30px] rounded-[30px] flex mx-auto mt-[5px] bg-blue-600"></span>
               </span>
-              <div className="flex space-x-[5px] mr-[300px]">
+              <div className="flex space-x-[5px] mr-[275px]">
                 <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-red-700"></span>
                 <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-yellow-400"></span>
                 <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-green-600"></span>
@@ -82,7 +88,7 @@ export default function Index(props) {
                       return (
                         <div key={value.url}>
                           <div>
-                            <p className="text-[20px] capitalize">
+                            <p className="text-[18px] capitalize">
                               <strong>{value.name}</strong>
                             </p>
                             <div>
@@ -117,7 +123,7 @@ export default function Index(props) {
             </div>
             <div className="">
               <div className="flex flex-col">
-                <div className="mt-[10px] mb-[5px] mr-[55px] flex">
+                <div className="mt-[10px] mb-[5px] mr-[10px] flex">
                   <span className=" w-[40px] h-[10px] mx-auto flex bg-red-700 rounded-[30px] mr-[10px] shadow shadow-black"></span>
                   <span className=" w-[40px] h-[10px] mx-auto flex bg-blue-700 rounded-[30px] ml-[10px] shadow shadow-black"></span>
                 </div>
@@ -136,8 +142,8 @@ export default function Index(props) {
                     />
                   </form>
                   <div>
-                    <select name="pokemon" className="absolute bottom-[310px] right-[4px] w-[80px] text-center outline-none rounded-[5px] bg-red-600 text-[17px]">
-                      <option disabled="on" selected="on" className="text-slate-400 text-[18px]">Pokelist...</option>
+                    <select className="absolute top-[40px] left-[115px] w-[186px] text-center outline-none rounded-[5px] bg-red-600 text-[17px]">
+                      <option disabled selected className="text-slate-400 text-[17px]">Pokelist</option>
                       {dex.map(value => {
                         return (
                           <option className="border-none text-[15px]" key={value.url}>
@@ -148,7 +154,7 @@ export default function Index(props) {
                     </select>
                   </div>
                   <div>
-                    <div className="w-[90px] h-[90px] absolute right-[25px] bottom-[20px]">
+                    <div className="w-[90px] h-[90px] absolute right-[15px] bottom-[20px]">
                       <div className="border-[10px] border-gray-700 w-[90px] absolute bottom-[35px] right-[8px] rounded-[30px] "></div>
                       <div className="border-[10px] border-gray-700 h-[90px] absolute right-[44px] rounded-[30px] "></div>
                     </div>
