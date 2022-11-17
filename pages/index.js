@@ -19,13 +19,32 @@ export default function Index(props) {
   const [dex, setDex] = useState(props.pokemons.results);
   let search = props.search.pokemon;
   
-  //Verificação
-
-   let pokeNames = dex.map((value) => value.name);
-  // let verify = pokeNames.find((e) => e == search);
-  // if (search != undefined && verify == undefined) {
-  // }
-
+  //Verificação ERROR:-Pokemon não listado 
+  let pokeNames = dex.map((value) => value.name);
+  let verify = pokeNames.find((e) => e == search);
+  if (search != undefined && verify == undefined) {
+    return (
+      <>
+        <div className="flex bg-blue-700 min-h-screen max-h-full">
+          <div className="bg-red-500 w-[450px] h-[300px] mx-auto mt-[80px] p-[10px] rounded-[30px] shadow-black shadow-2xl">
+            <div className="flex flex-col items-center mt-[40px] mt-[80px]">
+              <h1 className="text-[20px] mb-[10px]">Pokemon: <strong>{search}</strong> não encontrado!</h1>
+              <p className="text-[14px] mb-[20px]">clique no botão abaixo para retornar!</p>
+              <a href="/">
+                <button 
+                  type="submit" 
+                  className="text-[14px] bg-yellow-400 w-[85px] h-[25px] rounded-[4px] text-blue-700 duration-[.4s] shadow shadow-black"
+                >
+                 <strong>POKEDÉX</strong>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+  
   //Revisão da pesquisa
   let nameLower = []
   if(search != undefined) {
@@ -34,18 +53,19 @@ export default function Index(props) {
   }
 
   //Procura da skin do pokemon
+  let pokeURL = []
   dex.map((value) => {
     if (value.name == nameLower) {
-      let pokeURL = value.url;
-        async function call() {
-          await axios.get(pokeURL)
-            .then((data) => (
-              setSkin(data.data.sprites.front_default)
-            ));
-        }
-        call();
+      pokeURL.push(value.url)
+      call();
       }
   });
+  async function call() {
+    await axios.get(pokeURL[0])
+    .then((data) => (
+     setSkin(data.data.sprites.front_default)
+    ));
+  }
   let [skin, setSkin] = useState([]);
 
 	
