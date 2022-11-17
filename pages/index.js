@@ -4,9 +4,8 @@ import Link from "next/link";
 
 
 export async function getServerSideProps(context) {
-  const pokemons = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon?limit=950"
-  );
+  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=950" );
+ 
 
   return {
     props: {
@@ -21,9 +20,17 @@ export default function Index(props) {
   const [skin, setSkin] = useState([]); //-- Busca das skins dos pokemons
   let search = props.search.pokemon; //-- Pesquisa do usuário
   
+  //-- Conversão para minusculos
+  const nameLower = []
+  if(search != undefined) {
+    const lower = search.toLowerCase().trim();
+    nameLower.push(lower)
+  }
+
   //Verificação ERROR:-Pokemon não listado 
   let pokeNames = dex.map((value) => value.name);
-  let verify = pokeNames.find((e) => e == search);
+  let verify = pokeNames.find((e) => e == nameLower);
+
   if (search != undefined && verify == undefined) {
     return (
       <>
@@ -37,7 +44,7 @@ export default function Index(props) {
                   type="submit" 
                   className="text-[14px] bg-yellow-400 w-[85px] h-[25px] rounded-[4px] text-blue-700 duration-[.4s] shadow shadow-black"
                 >
-                 <strong>POKEDÉX</strong>
+                  <strong>POKEDÉX</strong>
                 </button>
               </Link>
             </div>
@@ -46,17 +53,11 @@ export default function Index(props) {
       </>
     )
   }
-  
-  //Revisão da pesquisa
-  let nameLower = []
-  if(search != undefined) {
-    const lower = search.toLowerCase();
-    nameLower.push(lower)
-  }
-  //Procura da skin do pokemon
+
+  //-- Procura da skin do pokemon
   let pokeURL = []
   dex.map((value) => {
-    if (value.name == nameLower) {
+    if (value.name === nameLower[0]) {
       pokeURL.push(value.url)
       call();
       }
@@ -68,6 +69,7 @@ export default function Index(props) {
     ));
   }
   
+
   return (
     <>
       <div className="bg-blue-700 min-h-screen max-h-full">
