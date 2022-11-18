@@ -77,7 +77,7 @@ export default function Index(props) {
         <div className="mx-auto w-[400px]">
           <div className="flex w-[400px] h-[400px]">
             <div className=" mt-[60px] h-[400px] w-[400px] bg-red-600 shadow-black shadow-2xl rounded-[10px]">
-              <div className="absolute font-bold ml-[355px] mt-[55px]">
+              <div className="absolute font-bold ml-[355px] mt-[68px]">
                 <p className="h-[26px] text-[25px]">P</p>
                 <p className="h-[26px] text-[20px]">o</p>
                 <p className="h-[26px] text-[20px]">k</p>
