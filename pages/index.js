@@ -4,7 +4,7 @@ import Link from "next/link";
 
 
 export async function getServerSideProps(context) {
-  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=503" );
+  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=600" );
  
 
   return {
@@ -73,120 +73,121 @@ export default function Index(props) {
 
   return (
     <>
-      <div className="flex bg-blue-700 min-h-screen max-h-full">
-        <div className="mx-auto w-[400px]">
-          <div className="flex w-[400px] h-[400px]">
-            <div className=" mt-[60px] h-[400px] w-[400px] bg-red-600 shadow-black shadow-2xl rounded-[10px]">
-              <div className="absolute font-bold ml-[355px] mt-[68px]">
-                <p className="h-[26px] text-[25px]">P</p>
-                <p className="h-[26px] text-[20px]">o</p>
-                <p className="h-[26px] text-[20px]">k</p>
-                <p className="h-[26px] text-[20px]">e</p>
-                <p className="h-[26px] text-[20px]">d</p>
-                <p className="h-[22px] text-[20px]">é</p>
-                <p className="h-[26px] text-[22px]">x</p>
-              </div>
-              <div className="mt-[10px] h-[45px] flex bg-red-600">
-                <span className="shadow shadow-black w-[40px] h-[40px] rounded-[30px] flex mx-auto bg-white">
-                  <span className="shadow shadow-blue-600 w-[30px] h-[30px] rounded-[30px] flex mx-auto mt-[5px] bg-blue-600"></span>
-                </span>
-                <div className="flex space-x-[5px] mr-[275px]">
-                  <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-red-700"></span>
-                  <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-yellow-400"></span>
-                  <span className=" shadow shadow-black w-[15px] h-[15px] rounded-[30px] flex mx-auto bg-green-600"></span>
+      <div className="bg-blue-600 min-h-screen max-h-full">
+        <div className="flex">
+          <div className="  h-[300px] w-[300px] mx-auto mt-[90px] ">
+            <div className="bg-red-600 h-full w-full shadow-black shadow-2xl rounded-[10px] p-[2px]">
+              <nav className=" h-[35px]">
+                <div>
+                  <div className="flex">
+                    <div className="ml-[5px] mt-[2px] mr-[6px]">
+                      <span className="block border-[4px] border-white w-[28px] h-[28px] rounded-[30px] m-0 shadow shadow-black ">
+                        <span className="block bg-blue-600 w-[20px] h-[20px] rounded-[30px] shadow shadow-black"></span>
+                      </span>
+                    </div>
+                    <div className="flex space-x-[2px] mt-[4px]">
+                      <span className="w-[12px] h-[12px] rounded-[30px] bg-red-600 shadow shadow-black"></span>
+                      <span className="w-[12px] h-[12px] rounded-[30px] bg-yellow-400 shadow shadow-black"></span>
+                      <span className="w-[12px] h-[12px] rounded-[30px] bg-green-500 shadow shadow-black"></span>
+                    </div>
+                  </div>
+                </div>  
+              </nav>
+              <main className="flex h-[205px]">
+               <section className=" h-full w-full">
+                <div className="mt-[5px]">
+                  <select defaultValue={"none"} className="flex w-[120px] ml-[95px] text-center outline-none bg-red-600 text-[14px] mx-auto">
+                    <option value="none" disabled className="text-slate-200 text-[15px]">Pokelist</option>
+                    {dex.map(value => {
+                      return (
+                        <option className="border-none text-[14px] capitalize" key={value.url}>
+                        {value.name}
+                        </option>
+                      )
+                    })}
+                  </select>
                 </div>
-              </div>
-              {/* Pokedex exibir: */}
-              <div className="text-center w-[220px] h-[215px] px-[20px] mx-auto mt-[15px] ml-[90px] p-[10px] bg-slate-300 shadow shadow-black rounded-bl-[20px]">
-                {/* Estilos Exibir lado de cima */}
-                <div className="flex w-[35px] mx-auto space-x-[15px] ">
-                  <span className="shadow shadow-black w-[10px] h-[10px] rounded-[30px] bg-red-700 flex"></span>
-                  <span className="shadow shadow-black w-[10px] h-[10px] rounded-[30px] bg-red-700 flex"></span>
-                </div>
-                <div className="shadow shadow-black w-[180px] h-[155px] bg-gray-800 mt-[5px] rounded-[10px] p-[2px]">
-                  <div className="text-white">
-                    {dex.map((value) => {
-                      if (nameLower == value.name) {
-                        return (
-                          <div key={value.url}>
-                            <div>
-                              <p className="text-[18px] capitalize">
-                                <strong>{value.name}</strong>
-                              </p>
+                <div className="flex flex-col w-[150px] h-[150px] bg-gray-200 mr-[38px] mx-auto mt-[7px] p-[2px] rounded-bl-[12px] shadow shadow-black">
+                  <div className="flex space-x-[6px] mx-auto mb-[4px] mt-[10px]">
+                    <span className="w-[5px] h-[5px] bg-red-700 rounded-[30px] shadow shadow-black"></span>
+                    <span className="w-[5px] h-[5px] bg-red-700 rounded-[30px] shadow shadow-black"></span>
+                  </div>
+                  <div className="bg-gray-700 w-[115px] h-[105px] mx-auto shadow shadow-black rounded-[10px]">
+                    <div className="text-white">
+                      {dex.map((value) => {
+                        if (nameLower == value.name) {
+                          return (
+                            <div key={value.url}>
                               <div>
-                                <div className="flex flex-col items-center w-[180px] h-[180px] mx-auto ml-[4px]">
-                                  <img
-                                    src={skin}
-                                    width="110px"
-                                    height="110px"
-                                    className="absolute bottom-[165px]"
-                                  />
-                                  <div className="mt-[100px] capitalize mr-[120px] min-w-[40px] max-w-[80px] ">
-                                    <p className="text-[17px]"><strong>{type}</strong></p>
+                                <p className="text-[13px] capitalize text-center mb-[2px]">
+                                  <strong>{value.name}</strong>
+                                </p>
+                                <div>
+                                  <div className="flex flex-col w-[85px] h-[85px] mt-[-10px] mx-auto">
+                                    <img
+                                      src={skin}
+                                      width="90px"
+                                      height="90px"
+                                      className="shadow hover:shadow-black duration-[.4s]"
+                                    />
+                                    <div className="capitalize mmin-w-[20px] max-w-[40px] ">
+                                      <p className="text-[13px] mt-[-8px] ml-[-10px]"><strong>{type}</strong></p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      }
-                    })}
+                          );
+                        }
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex mt-[6px] ml-[16px]">
+                    <span className="bg-red-600 w-[10px] h-[10px] rounded-[30px] shadow shadow-black"></span>
+                    <div className="flex flex-col space-y-[2px] ml-[88px]">
+                      <span className="bg-black w-[10px] h-[1px]"></span>
+                      <span className="bg-black w-[10px] h-[1px]"></span>
+                      <span className="bg-black w-[10px] h-[1px]"></span>
+                      <span className="bg-black w-[10px] h-[1px]"></span>
+                    </div>
                   </div>
                 </div>
-                {/* Estilos Exibir lado de baixo */}
-                <div className="flex space-x-[140px]">
-                  <div className="mt-[10px]">
-                    <span className="shadow shadow-black w-[15px] h-[15px] flex rounded-[30px] bg-red-600 ml-[3px]"></span>
-                  </div>
-                  <div className="space-y-[4px] mt-[8px]">
-                    <span className="border border-black w-[20px] flex"></span>
-                    <span className="border border-black w-[20px] flex"></span>
-                    <span className="border border-black w-[20px] flex"></span>
-                    <span className="border border-black w-[20px] flex"></span>
+                <div>
+                  <div className="flex space-x-[6px] w-[100px] mx-auto mt-[10px] ml-[105px]">
+                    <span className=" w-[40px] h-[8px] rounded-[30px] shadow shadow-black bg-red-800"></span>
+                    <span className=" w-[40px] h-[8px] rounded-[30px] shadow shadow-black bg-blue-700"></span>
                   </div>
                 </div>
-              </div>
-              <div className="">
-                <div className="flex flex-col">
-                  <div className="mt-[10px] mb-[5px] mr-[10px] flex">
-                    <span className=" w-[40px] h-[10px] mx-auto flex bg-red-700 rounded-[30px] mr-[10px] shadow shadow-black"></span>
-                    <span className=" w-[40px] h-[10px] mx-auto flex bg-blue-700 rounded-[30px] ml-[10px] shadow shadow-black"></span>
+                </section>
+                <aside className=" h-full w-[40px] text-center">
+                  <div className="mt-[8px] mr-[14px] text-[17px]">
+                    <p><strong  >P<br/>O<br/>K<br/>E<br/>D<br/>É<br/>X</strong></p>
                   </div>
+                </aside>
+              </main>
+              <footer className="">
+                 <div>
                   <div className="flex">
-                    <form method="GET" className="flex mt-[4px]">
-                      <button
-                        type="submit"
-                        className="ml-[30px] w-[60px] h-[60px] mt-[1px] rounded-[30px] bg-gray-700 shadow shadow-black"
-                      ></button>
-                      <input
-                        autoComplete="off"
-                        name="pokemon"
-                        className="text-center bg-green-400 h-[40px] w-[150px] py-[30px] px-[10px] mx-auto flex ml-[30px] shadow shadow-black rounded-[8px] outline-none "
-                        placeholder="Buscar..."
-                        required
-                      />
+                    <form method="GET" className="flex mt-[5px]">
+                        <button
+                          type="submit"
+                          className=" w-[40px] h-[40px] rounded-[30px] bg-gray-700 shadow shadow-black ml-[20px] mt-[-3px]">
+                        </button>
+                        <input
+                          autoComplete="off"
+                          name="pokemon"
+                          className="text-center bg-green-400 mx-auto flex shadow shadow-black rounded-[8px] outline-none text-[15px] w-[120px] h-[35px] ml-[30px]"
+                          placeholder="Buscar..."
+                          required
+                        />
                     </form>
-                    <div>
-                      <select defaultValue={"none"} className="absolute top-[98px] ml-[-155px] w-[186px] text-center outline-none rounded-[5px] bg-red-600 text-[19px]">
-                        <option value="none" disabled className="text-slate-200 text-[16px]">Pokelist</option>
-                        {dex.map(value => {
-                          return (
-                            <option className="border-none text-[15px] capitalize" key={value.url}>
-                            {value.name}
-                            </option>
-                          )
-                        })}
-                      </select>
-                    </div>
-                    <div>
-                      <div className="w-[90px] h-[90px] mt-[-10px] ml-[25px] absolute ">
-                        <div className="border-[10px] border-gray-700 bg-gray-700 w-[90px] absolute bottom-[35px] right-[8px] rounded-[30px] "></div>
-                        <div className="border-[10px] border-gray-700 bg-gray-700 h-[90px] absolute right-[44px] rounded-[30px] "></div>
-                      </div>
+                    <div className="flex ml-[40px] mt-[14px] w-[40px] h-[40px]">
+                      <span className="absolute mt-[-22px] w-[15px] h-[60px] bg-slate-700 rounded-[20px]"></span>
+                      <span className="absolute ml-[-22px] w-[60px] h-[15px] bg-slate-700 rounded-[20px]"></span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </footer>
             </div>
           </div>
         </div>
