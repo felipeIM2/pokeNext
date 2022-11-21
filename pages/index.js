@@ -4,8 +4,7 @@ import Link from "next/link";
 
 
 export async function getServerSideProps(context) {
-  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=600" );
- 
+  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=600");
 
   return {
     props: {
@@ -45,7 +44,7 @@ export default function Index(props) {
                   type="submit" 
                   className="text-[14px] bg-yellow-400 w-[85px] h-[25px] rounded-[4px] text-blue-700 duration-[.4s] shadow shadow-black"
                 >
-                  <strong>POKEDÉX</strong>
+                 <strong>POKEDÉX</strong>
                 </button>
               </Link>
             </div>
@@ -63,19 +62,25 @@ export default function Index(props) {
       call();
       }
   });
+
   async function call() {
-    await axios.get(pokeURL[0])
-    .then((data) => (
-     setSkin(data.data.sprites.front_default),
-     setType(data.data.types[0].type.name)
+    await fetch(pokeURL[0])
+    .then( async (data) => (
+      await axios.get(data.url)
+      .then((data) => (
+         setSkin(data.data.sprites.front_default),
+         setType(data.data.types[0].type.name)
+      ))
+
     ));
   }
+  let y = true
 
   return (
     <>
       <div className="bg-blue-600 min-h-screen max-h-full">
         <div className="flex">
-          <div className="  h-[300px] w-[300px] mx-auto mt-[90px] ">
+          <div className=" h-[300px] w-[300px] mx-auto mt-[90px] ">
             <div className="bg-red-600 h-full w-full shadow-black shadow-2xl rounded-[10px] p-[2px]">
               <nav className=" h-[35px]">
                 <div>
@@ -124,12 +129,14 @@ export default function Index(props) {
                                 </p>
                                 <div>
                                   <div className="flex flex-col w-[85px] h-[85px] mt-[-10px] mx-auto">
-                                    <img
-                                      src={skin}
-                                      width="90px"
-                                      height="90px"
-                                      className="shadow hover:shadow-black duration-[.4s]"
-                                    />
+                                    <div className="shadow hover:shadow-black duration-[.4s] rounded-[10px] m-[4px] p-[2px] ">
+                                      <img
+                                        src={skin}
+                                        width="90px"
+                                        height="90px"
+                                        className="hover:scale-[1.1] duration-[.4s]"
+                                      />
+                                    </div>
                                     <div className="capitalize mmin-w-[20px] max-w-[40px] ">
                                       <p className="text-[13px] mt-[-8px] ml-[-10px]"><strong>{type}</strong></p>
                                     </div>
@@ -171,20 +178,21 @@ export default function Index(props) {
                     <form method="GET" className="flex mt-[5px]">
                         <button
                           type="submit"
-                          className=" w-[40px] h-[40px] rounded-[30px] bg-gray-700 shadow shadow-black ml-[20px] mt-[-3px]">
+                          className=" w-[40px] h-[40px] rounded-[30px] bg-gray-700 shadow shadow-black ml-[25px] mt-[-3px]">
                         </button>
                         <input
                           autoComplete="off"
                           name="pokemon"
-                          className="text-center bg-green-400 mx-auto flex shadow shadow-black rounded-[8px] outline-none text-[15px] w-[120px] h-[35px] ml-[30px]"
+                          className="text-center bg-green-400 mx-auto flex shadow shadow-black rounded-[8px] outline-none text-[13px] w-[120px] h-[35px] ml-[25px] p-[15px]"
                           placeholder="Buscar..."
                           required
                         />
                     </form>
                     <div className="flex ml-[40px] mt-[14px] w-[40px] h-[40px]">
-                      <span className="absolute mt-[-22px] w-[15px] h-[60px] bg-slate-700 rounded-[20px]"></span>
-                      <span className="absolute ml-[-22px] w-[60px] h-[15px] bg-slate-700 rounded-[20px]"></span>
+                      <span className="absolute mt-[-22px] w-[15px] h-[60px] bg-slate-700 rounded-[20px] "></span>
+                      <span className="absolute ml-[-22px] w-[60px] h-[15px] bg-slate-700 rounded-[20px] "></span>
                     </div>
+
                   </div>
                 </div>
               </footer>
