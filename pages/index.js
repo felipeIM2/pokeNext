@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react"
 import Link from "next/link";
+import Image from "next/image";
 
 
 export async function getServerSideProps(context) {
@@ -28,9 +29,9 @@ export default function Index(props) {
     nameLower.push(lower)
   }
 
-  //Verificação ERROR:-Pokemon não listado 
+  //-- Verificação ERROR:-Pokemon não listado 
   let pokeNames = dex.map((value) => value.name);
-  let verify = pokeNames.find((e) => e == nameLower);
+  let verify = pokeNames.find((value) => value == nameLower);
   if (search != undefined && verify == undefined) {
     return (
       <>
@@ -62,19 +63,17 @@ export default function Index(props) {
       call();
       }
   });
-
   async function call() {
-    await fetch(pokeURL[0])
+    await axios.get(pokeURL[0])
     .then( async (data) => (
-      await axios.get(data.url)
-      .then((data) => (
-         setSkin(data.data.sprites.front_default),
-         setType(data.data.types[0].type.name)
-      ))
-
+      setSkin(data.data.sprites.front_default),
+      setType(data.data.types[0].type.name)
     ));
   }
-  let y = true
+  //-- Retorno do <Image>
+  const myImage = () => {
+    return skin
+  }
 
   return (
     <>
@@ -124,21 +123,22 @@ export default function Index(props) {
                           return (
                             <div key={value.url}>
                               <div>
-                                <p className="text-[13px] capitalize text-center mb-[2px]">
+                                <p className="text-[13px] capitalize text-center mb-[4px]">
                                   <strong>{value.name}</strong>
                                 </p>
                                 <div>
-                                  <div className="flex flex-col w-[85px] h-[85px] mt-[-10px] mx-auto">
+                                  <div className="flex flex-col w-[75px] h-[75px] mt-[-10px] mx-auto">
                                     <div className="shadow hover:shadow-black duration-[.4s] rounded-[10px] m-[4px] p-[2px] ">
-                                      <img
-                                        src={skin}
-                                        width="90px"
-                                        height="90px"
+                                      <Image
+                                        loader={myImage}
+                                        src="skin"
+                                        width="70px"
+                                        height="70px"
                                         className="hover:scale-[1.1] duration-[.4s]"
                                       />
                                     </div>
-                                    <div className="capitalize mmin-w-[20px] max-w-[40px] ">
-                                      <p className="text-[13px] mt-[-8px] ml-[-10px]"><strong>{type}</strong></p>
+                                    <div className="capitalize mmin-w-[20px] max-w-[40px] mt-[2px] mb-[1px] ">
+                                      <p className="text-[13px] mt-[-8px] ml-[-15px]"><strong>{type}</strong></p>
                                     </div>
                                   </div>
                                 </div>
