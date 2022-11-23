@@ -34,23 +34,21 @@ export default function Index(props) {
   let verify = pokeNames.find((value) => value == nameLower); //-- Comparação dos pokemons com o envio da pesquisa
 
   //-- Verificação de loading
-  if (verify != undefined) {
     useEffect(() => {
       setTimeout(() => {
         setLoading(false);
       }, 400);
     }, []);
-    if(loading) {
-      return (
-        <>
-          <div>
-            <p>Carregando...</p>
-          </div>
-        </>
-      )
-    }
+  
+  if(loading) {
+    return (
+      <>
+        <div>
+          <p>Carregando...</p>
+        </div>
+      </>
+    )
   }
-
 
   //-- Verificação ERROR:-Pokemon não listado 
   if (search != undefined && verify == undefined) {
@@ -223,5 +221,5 @@ export default function Index(props) {
         </div>
       </div>
     </>
-  );
+  )
 }
