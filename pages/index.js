@@ -5,7 +5,7 @@ import Image from "next/image";
 
 
 export async function getServerSideProps(context) {
-  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=600");
+  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=1000");
 
   return {
     props: {
@@ -37,18 +37,17 @@ export default function Index(props) {
     useEffect(() => {
       setTimeout(() => {
         setLoading(false);
-      }, 400);
+      }, 200);
     }, []);
-  
-  if(loading) {
-    return (
-      <>
-        <div>
-          <p>Carregando...</p>
-        </div>
-      </>
-    )
-  }
+  // if(loading) {
+  //   return (
+  //     <>
+  //       <div>
+  //         <p>Carregando...</p>
+  //       </div>
+  //     </>
+  //   )
+  // }
 
   //-- Verificação ERROR:-Pokemon não listado 
   if (search != undefined && verify == undefined) {
@@ -84,7 +83,7 @@ export default function Index(props) {
   });
   async function call() {
     await axios.get(pokeURL[0])
-    .then( async (data) => (
+    .then( (data) => (
       setSkin(data.data.sprites.front_default),
       setType(data.data.types[0].type.name)
     ));
