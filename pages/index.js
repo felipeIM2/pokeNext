@@ -39,15 +39,15 @@ export default function Index(props) {
         setLoading(false);
       }, 400);
     }, []);
-  // if(loading) {
-  //   return (
-  //     <>
-  //       <div>
-  //         <p>Carregando...</p>
-  //       </div>
-  //     </>
-  //   )
-  // }
+  if(loading) {
+    return (
+      <>
+        <div>
+          <p>Carregando...</p>
+        </div>
+      </>
+    )
+  }
 
   //-- Verificação ERROR:-Pokemon não listado 
   if (search != undefined && verify == undefined) {
