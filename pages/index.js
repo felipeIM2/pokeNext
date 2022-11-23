@@ -5,7 +5,7 @@ import Image from "next/image";
 
 
 export async function getServerSideProps(context) {
-  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=1000");
+  const pokemons = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=800");
 
   return {
     props: {
@@ -37,7 +37,7 @@ export default function Index(props) {
     useEffect(() => {
       setTimeout(() => {
         setLoading(false);
-      }, 200);
+      }, 400);
     }, []);
   // if(loading) {
   //   return (
