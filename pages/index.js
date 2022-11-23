@@ -132,6 +132,7 @@ export default function Index(props) {
                                       <Image
                                         loader={myImage}
                                         src="skin"
+                                        alt=""
                                         width="70px"
                                         height="70px"
                                         className="hover:scale-[1.1] duration-[.4s]"
