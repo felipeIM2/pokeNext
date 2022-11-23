@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link";
 import Image from "next/image";
 
@@ -19,9 +19,10 @@ export default function Index(props) {
 
   const [dex, setDex] = useState(props.pokemons.results); //-- Dados de todos os pokemons
   const [skin, setSkin] = useState([]); //-- Busca das skins dos pokemons
-  const [type, setType] = useState([]) //-- Buscas dos tipos de pokemons
+  const [type, setType] = useState([]); //-- Buscas dos tipos de pokemons
+  const [loading, setLoading] = useState(true); //-- loading pagina
   let search = props.search.pokemon; //-- Pesquisa do usuário
-  
+
   //-- Conversão para minusculos
   const nameLower = []
   if(search != undefined) {
@@ -29,9 +30,29 @@ export default function Index(props) {
     nameLower.push(lower)
   }
 
+  let pokeNames = dex.map((value) => value.name); //-- Lista dos pokemons da API
+  let verify = pokeNames.find((value) => value == nameLower); //-- Comparação dos pokemons com o envio da pesquisa
+
+  //-- Verificação de loading
+  if (verify != undefined) {
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 400);
+    }, []);
+    if(loading) {
+      return (
+        <>
+          <div>
+            <p>Carregando...</p>
+          </div>
+        </>
+      )
+    }
+  }
+
+
   //-- Verificação ERROR:-Pokemon não listado 
-  let pokeNames = dex.map((value) => value.name);
-  let verify = pokeNames.find((value) => value == nameLower);
   if (search != undefined && verify == undefined) {
     return (
       <>
@@ -105,7 +126,7 @@ export default function Index(props) {
                     {dex.map(value => {
                       return (
                         <option className="border-none text-[14px] capitalize" key={value.url}>
-                        {value.name}
+                         {value.name}
                         </option>
                       )
                     })}
@@ -138,7 +159,7 @@ export default function Index(props) {
                                         className="hover:scale-[1.1] duration-[.4s]"
                                       />
                                     </div>
-                                    <div className="capitalize mmin-w-[20px] max-w-[40px] mt-[2px] mb-[1px] ">
+                                    <div className="capitalize min-w-[20px] max-w-[40px] mt-[2px] mb-[1px] ">
                                       <p className="text-[13px] mt-[-8px] ml-[-15px]"><strong>{type}</strong></p>
                                     </div>
                                   </div>
