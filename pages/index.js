@@ -32,18 +32,28 @@ export default function Index(props) {
 
   let pokeNames = dex.map((value) => value.name); //-- Lista dos pokemons da API
   let verify = pokeNames.find((value) => value == nameLower); //-- Comparação dos pokemons com o envio da pesquisa
-
+  
   //-- Verificação de loading
     useEffect(() => {
-      setTimeout(() => {
+      
+      setTimeout(() => { 
         setLoading(false);
-      }, 400);
+      }, 1000);
     }, []);
+  
   if(loading) {
     return (
       <>
         <div>
-          <p>Carregando...</p>
+          <div className="flex bg-blue-500 min-h-screen">
+            <div className="flex flex-col items-center w-[400px] mx-auto ">
+              <div className="flex mt-[250px] border-[10px] border-t-red-500 border-blue-500 w-[100px] h-[100px] rounded-[100%] animate-spin">
+              </div>
+              <div className="flex w-[100px] h-[100px] mt-[20px]">
+                <p className="flex ml-[6px] animate-pulse">Carregando...</p>
+              </div>
+            </div>
+          </div>
         </div>
       </>
     )
